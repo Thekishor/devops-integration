@@ -1,0 +1,8 @@
+server:
+  port: 9099
+spring:
+  application:
+    name: devops-integration
+  data:
+    mongodb:
+      uri: ${MONGO_URI:mongodb://localhost:27017/devops-integration}
