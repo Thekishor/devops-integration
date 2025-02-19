@@ -24,8 +24,8 @@ This project is a Spring Boot microservice named "devops-integration" that demon
 ---
 
 ## API Endpoints
-| Method | Endpoint | Description |
-|--------|---------|-------------|
+| Method | Endpoint | Description | Url |
+|--------|---------|-------------|-------------|
 | GET | `/user/{userId}` | Fetch a record by ID | http://localhost:9099/user/67b56de01ce51a216c9122aa |
 | GET | `/user` | Fetch all records | http://localhost:9099/user |
 | POST | `/user` | Create a new record | http://localhost:9099/user |
