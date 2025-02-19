@@ -26,11 +26,11 @@ This project is a Spring Boot microservice named "devops-integration" that demon
 ## API Endpoints
 | Method | Endpoint | Description |
 |--------|---------|-------------|
-| GET | `/user/{userId}` | Fetch a record by ID |
-| GET | `/user` | Fetch all records |
-| POST | `/user` | Create a new record |
-| PUT | `/user/{userId}` | Update an existing record |
-| DELETE | `/user/{userId}` | Delete a record |
+| GET | `/user/{userId}` | Fetch a record by ID | http://localhost:9099/user/67b56de01ce51a216c9122aa |
+| GET | `/user` | Fetch all records | http://localhost:9099/user |
+| POST | `/user` | Create a new record | http://localhost:9099/user |
+| PUT | `/user/{userId}` | Update an existing record | http://localhost:9099/user/67b56de01ce51a216c9122aa |
+| DELETE | `/user/{userId}` | Delete a record | http://localhost:9099/user/67b56de01ce51a216c9122aa |
 
 ### Example Request (POST)
 ```json
@@ -60,7 +60,26 @@ This project is a Spring Boot microservice named "devops-integration" that demon
     }
 }
 ```
-
+### Validation Example 
+```json
+{
+    "username": "Rajan",
+    "email": "Rajan",
+    "password": "Rajan",
+    "address": {
+        "state": "Lumbini",
+        "city": "2223",
+        "zipcode": "YE376"
+    }
+}
+```
+### Validation Response
+```json
+{
+    "password": "Password must contain at least one uppercase letter, one lowercase letter, one number, and one special character",
+    "email": "User email is not a valid email address"
+}
+```
 ---
 
 ## Global Exception Handling
@@ -142,13 +161,42 @@ ENTRYPOINT ["java","-jar","/devops-integration.jar"]
 ## Docker Compose
 ### `docker-compose.yaml`
 ```yaml
+
 services:
   devops-integration:
-    image: your-dockerhub-username/devops-integration:latest
+    image: thekishor/devops-integration:0.0.1
     container_name: devops-integration
     ports:
-      - "8080:8080"
-    restart: always
+      - '9099:9099'
+    environment:
+      SPRING_DATA_MONGODB_HOST: mongo
+      SPRING_DATA_MONGODB_PORT: 27017
+      SPRING_DATA_MONGODB_USERNAME: kishor
+      SPRING_DATA_MONGODB_PASSWORD: kishor
+
+    depends_on:
+      - mongo
+    networks:
+      - devops-integration
+
+  mongo:
+    image: mongo:latest
+    container_name: mongo
+    ports:
+      - '27017:27017'
+    volumes:
+      - mongo-data:/data/db
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: kishor
+      MONGO_INITDB_ROOT_PASSWORD: kishor
+    networks:
+      - devops-integration
+
+networks:
+  devops-integration:
+    driver: bridge
+volumes:
+  mongo-data:
 ```
 
 ### Run with Docker Compose
