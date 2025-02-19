@@ -1,0 +1,35 @@
+# services:
+#   devops-integration:
+#     image: thekishor/devops-integration:0.0.1
+#     container_name: devops-integration
+#     ports:
+#       - '9099:9099'
+#     environment:
+#       SPRING_DATA_MONGODB_HOST: mongo
+#       SPRING_DATA_MONGODB_PORT: 27017
+#       SPRING_DATA_MONGODB_USERNAME: kishor
+#       SPRING_DATA_MONGODB_PASSWORD: kishor
+#
+#     depends_on:
+#       - mongo
+#     networks:
+#       - devops-integration
+#
+#   mongo:
+#     image: mongo:latest
+#     container_name: mongo
+#     ports:
+#       - '27017:27017'
+#     volumes:
+#       - mongo-data:/data/db
+#     environment:
+#       MONGO_INITDB_ROOT_USERNAME: kishor
+#       MONGO_INITDB_ROOT_PASSWORD: kishor
+#     networks:
+#       - devops-integration
+#
+# networks:
+#   devops-integration:
+#     driver: bridge
+# volumes:
+#   mongo-data:
