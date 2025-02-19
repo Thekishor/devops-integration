@@ -23,14 +23,19 @@ This project is a Spring Boot microservice named "devops-integration" that demon
 
 ---
 
-## API Endpoints
-| Method | Endpoint | Description | Url |
-|--------|---------|-------------|-------------|
-| GET | `/user/{userId}` | Fetch a record by ID | http://localhost:9099/user/67b56de01ce51a216c9122aa |
-| GET | `/user` | Fetch all records | http://localhost:9099/user |
-| POST | `/user` | Create a new record | http://localhost:9099/user |
-| PUT | `/user/{userId}` | Update an existing record | http://localhost:9099/user/67b56de01ce51a216c9122aa |
-| DELETE | `/user/{userId}` | Delete a record | http://localhost:9099/user/67b56de01ce51a216c9122aa |
+## API Endpoints  
+
+Base URL: `http://localhost:9099`  
+
+| Method  | Endpoint         | Description             | Full URL Example |
+|---------|-----------------|-------------------------|------------------|
+| **GET**  | `/user/{userId}` | Fetch a record by ID    | `[GET] http://localhost:9099/user/67b56de01ce51a216c9122a` |
+| **GET**  | `/user`         | Fetch all records       | `[GET] http://localhost:9099/user` |
+| **POST** | `/user`         | Create a new record     | `[POST] http://localhost:9099/user` |
+| **PUT**  | `/user/{userId}` | Update an existing record | `[PUT] http://localhost:9099/user/67b56de01ce51a216c9122aa` |
+| **DELETE** | `/user/{userId}` | Delete a record       | `[DELETE] http://localhost:9099/user/67b56de01ce51a216c9122aa` |
+
+
 
 ### Example Request (POST)
 ```json
@@ -58,6 +63,26 @@ This project is a Spring Boot microservice named "devops-integration" that demon
         "city": "Butwal",
         "zipcode": "YE376"
     }
+}
+```
+### Duplicate User Post Request
+```json
+{
+    "username": "Kishor",
+    "email": "Kishorpandey633@gmail.com",
+    "password": "Kishor@22",
+    "address": {
+        "state": "Lumbini",
+        "city": "Butwal",
+        "zipcode": "YE376"
+    }
+}
+```
+### Response of Duplicate Data or User
+```json
+{
+    "message": "User Already Exists With Email",
+    "status": true
 }
 ```
 ### Validation Example 
